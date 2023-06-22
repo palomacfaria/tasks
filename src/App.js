@@ -13,7 +13,19 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Enviou");
+
+    const todo = {
+      id: Math.random(),
+      title,
+      time,
+      done: false,
+    };
+
+    //Envio para a API
+    console.log(todo);
+
+    setTitle("");
+    setTime("");
   };
 
   return (
@@ -21,12 +33,38 @@ function App() {
       <div className="todo-header">
         <h1>React Todo</h1>
       </div>
+
       <div className="form-todo">
         <h2>Insira a sua próxia tarefa:</h2>
         <form onSubmit={handleSubmit}>
-          <input type="submit" value="Enviar" />
+          <div className="form-control">
+            <label htmlFor="title">O que você vai fazer?</label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Título da tarefa"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title || ""}
+              required
+            />
+          </div>
+
+          <div className="form-control">
+            <label htmlFor="time">Duração:</label>
+            <input
+              type="text"
+              name="time"
+              placeholder="Tempo estimado (em horas)"
+              onChange={(e) => setTime(e.target.value)}
+              value={time || ""}
+              required
+            />
+          </div>
+
+          <input type="submit" value="Criar Tarefa" />
         </form>
       </div>
+
       <div className="list-todo">
         <h2>Lista de tarefas:</h2>
         {todos.length === 0 && <p>Não há tarefas!</p>}
